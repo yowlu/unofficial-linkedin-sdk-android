@@ -110,12 +110,14 @@ public class LISessionManager {
      */
     public void init(Activity activity,
                      Scope scope, AuthListener callback, boolean showGoToAppStoreDialog) {
+        authListener = callback;
         //check if LI
         if (!LIAppVersion.isLIAppCurrent(ctx)) {
-            AppStore.goAppStore(activity, showGoToAppStoreDialog);
+            authListener.onAuthAppNotInstalled();
+            //AppStore.goAppStore(activity, showGoToAppStoreDialog);
             return;
         }
-        authListener = callback;
+        
         Intent i = new Intent();
         i.setClassName(LI_APP_PACKAGE_NAME, LI_APP_AUTH_CLASS_NAME);
         i.putExtra(SCOPE_DATA, scope.createScope());
