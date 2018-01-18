@@ -34,5 +34,10 @@ public interface AuthListener {
      * @param error information on why the authorization did not occur
      */
     void onAuthError(LIAuthError error);
+    
+    /**
+     * called when the device has not the app installed
+     */
+    void onAuthAppNotInstalled();
 }
 
